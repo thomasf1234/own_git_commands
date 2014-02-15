@@ -1,0 +1,5 @@
+#fix the interaction with git, i.e. quotes
+echo $@
+/usr/bin/git $@
+$HOME/own_git_commands/$1/master.sh $@
+
