@@ -20,9 +20,9 @@ fi
 #if the commit has been added to the remote changes to the remote branch
 if [ "$1" == "push" ]
 then
-  #/usr/bin/git fetch origin > /dev/null
-  #CURRENT_COMMIT=$(/usr/bin/git rev-parse HEAD)
-  #/usr/bin/git branch -r --contains $CURRENT_COMMIT
+  CURRENT_COMMIT=$(/usr/bin/git rev-parse HEAD)
+  /usr/bin/git fetch origin > /dev/null  
+  /usr/bin/git branch -r --contains $CURRENT_COMMIT > file
   #do all this unless master has been pushed
 fi
 
