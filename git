@@ -1,0 +1,16 @@
+#!/bin/bash
+
+SUBSTR_FIRST_ARG=${1:0:10}
+if [ "$SUBSTR_FIRST_ARG" == "--git-dir=" ]
+then
+  #redirect to git
+  /usr/bin/git $@
+else
+  #do git first
+  /usr/bin/git $@
+
+  #do some checks before our callbacks
+  $HOME/own_git_commands/$1/master.sh $@
+fi
+
+
