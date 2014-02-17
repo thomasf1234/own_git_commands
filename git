@@ -8,9 +8,18 @@ then
 else
   #do git first
   /usr/bin/git $@
-
-  #do some checks before our callbacks
-  $HOME/own_git_commands/$1/master.sh $@
+  
+  if [ "$1" == "push" ]
+  then
+    CURRENT_COMMIT=$(/usr/bin/git rev-parse HEAD)
+    /usr/bin/git fetch origin > /dev/null  
+    REMOTE_BRANCHES_THAT_CONTAIN_CURRENT_COMMIT=$(/usr/bin/git branch -r --contains $CURRENT_COMMIT)
+    if [ "${#REMOTE_BRANCHES_THAT_CONTAIN_CURRENT_COMMIT}" -eq 1 ]
+    then
+      $HOME/own_git_commands/$1/master.sh $@ 
+    fi
+    #do all this unless master has been pushed
+  fi	
 fi
 
 #check last arg of git push 
@@ -18,12 +27,6 @@ fi
 
 #http://www.xormedia.com/git-check-if-a-commit-has-been-pushed/
 #if the commit has been added to the remote changes to the remote branch
-if [ "$1" == "push" ]
-then
-  CURRENT_COMMIT=$(/usr/bin/git rev-parse HEAD)
-  /usr/bin/git fetch origin > /dev/null  
-  /usr/bin/git branch -r --contains $CURRENT_COMMIT > file
-  #do all this unless master has been pushed
-fi
+
 
 
