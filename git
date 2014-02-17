@@ -13,4 +13,17 @@ else
   $HOME/own_git_commands/$1/master.sh $@
 fi
 
+#check last arg of git push 
+
+
+#http://www.xormedia.com/git-check-if-a-commit-has-been-pushed/
+#if the commit has been added to the remote changes to the remote branch
+if [ "$1" == "push" ]
+then
+  #/usr/bin/git fetch origin > /dev/null
+  #CURRENT_COMMIT=$(/usr/bin/git rev-parse HEAD)
+  #/usr/bin/git branch -r --contains $CURRENT_COMMIT
+  #do all this unless master has been pushed
+fi
+
 
